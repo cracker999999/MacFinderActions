@@ -2,13 +2,17 @@ import Cocoa
 import FinderSync
 
 final class FinderSync: FIFinderSync {
+    //后续加菜单只要加一个 action case + title + actionID
     private enum MenuAction: Int, CaseIterable {
         case openInCodex
+        case openInClaudeCode
 
         var title: String {
             switch self {
             case .openInCodex:
                 return "Open in Codex"
+            case .openInClaudeCode:
+                return "Open in ClaudeCode"
             }
         }
 
@@ -16,6 +20,8 @@ final class FinderSync: FIFinderSync {
             switch self {
             case .openInCodex:
                 return "codex"
+            case .openInClaudeCode:
+                return "claude"
             }
         }
     }

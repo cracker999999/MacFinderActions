@@ -1,12 +1,12 @@
 # FinderActions Finder Extension
 
-在 Finder 目录空白处右键显示可扩展菜单（当前包含 `Open in Codex`），点击后在该目录执行对应 CLI。
+在 Finder 目录空白处右键显示可扩展菜单（当前包含 `Open in Codex`、`Open in ClaudeCode`），点击后在该目录执行对应 CLI。
 
 ## 行为
 
 - 仅在目录空白处显示菜单。
 - 在文件/文件夹项本身右键时不显示。
-- 点击后由主 App 启动 Terminal 并执行对应命令（当前为 `codex`）。
+- 点击后由主 App 启动 Terminal 并执行对应命令（当前支持 `codex`、`claude`）。
 
 ## 首次安装
 

@@ -4,6 +4,7 @@ import Cocoa
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private enum RequestAction: String {
         case codex
+        case claude
     }
 
     static func main() {
@@ -88,15 +89,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         switch action {
         case .codex:
             openCodexInTerminal(directory: directory)
+        case .claude:
+            openClaudeInTerminal(directory: directory)
         }
     }
 
     private func openCodexInTerminal(directory: String) {
+        openInTerminal(directory: directory, executable: "codex", logPrefix: "openCodexInTerminal")
+    }
+
+    private func openClaudeInTerminal(directory: String) {
+        openInTerminal(directory: directory, executable: "claude", logPrefix: "openClaudeInTerminal")
+    }
+
+    private func openInTerminal(directory: String, executable: String, logPrefix: String) {
         let cmd = """
-        export PATH=/usr/local/bin:$PATH; \
         cd \(shellQuote(directory)); \
         clear; \
-        exec codex
+        exec \(executable)
         """
         let script = """
         tell application id "com.apple.Terminal"
@@ -112,9 +122,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         if let error {
-            log("openCodexInTerminal: NSAppleScript error=\(error)")
+            log("\(logPrefix): NSAppleScript error=\(error)")
         } else {
-            log("openCodexInTerminal: NSAppleScript success")
+            log("\(logPrefix): NSAppleScript success")
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
